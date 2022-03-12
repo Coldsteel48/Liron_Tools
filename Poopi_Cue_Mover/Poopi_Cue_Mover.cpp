@@ -12,6 +12,12 @@
 #include <algorithm>
 #include <fstream>
 
+bool IsWav(const std::string& filename)
+{
+	std::string Extension = filename.substr(filename.find_last_of(".") + 1);
+	ToLowerCase(Extension);
+	return (Extension == "wav");
+}
 
 bool IsCueFile(const std::string& filename)
 {
@@ -42,7 +48,8 @@ int main(int argc, char* argv[])
 	std::string base_filename = path.substr(path.find_last_of("/\\") + 1);
 	std::string inputFolderPath = path.substr(0, path.find_last_of("/\\") + 1);
 
-	std::vector<std::string> CueFilePaths;
+	std::vector<std::string> CueFilePaths; CueFilePaths.reserve(2000);
+	std::vector<std::string> WavFilePaths; WavFilePaths.reserve(2000);
 
 	//We have to list files and move them to Cue dir instead of Wav
 	for (const auto& entry : std::filesystem::recursive_directory_iterator(inputFolderPath))
@@ -55,6 +62,10 @@ int main(int argc, char* argv[])
 				//We have Cue file, we should move it.
 				CueFilePaths.push_back(fullPath);
 			}
+			else if (IsWav(fullPath))
+			{
+				WavFilePaths.push_back(fullPath);
+			}
 		}
 	}
 
@@ -65,6 +76,11 @@ int main(int argc, char* argv[])
 		{
 			std::filesystem::rename(CueFile, NewFilePath);
 		}
+	}
+
+	for (const auto& WavFile : WavFilePaths)
+	{
+		std::remove(WavFile.c_str());
 	}
 
 	return 0;

@@ -4,7 +4,9 @@
 #include <sys/types.h>  // For stat().
 #include <sys/stat.h>   // For stat().
 #include <windows.h>
+#include <cctype>
 #include <string.h>
+#include <algorithm>
 
 
 bool IsDirectoryExists(const char* absolutePath)
@@ -46,4 +48,14 @@ void FindAndReplaceAll(std::string& data, std::string toSearch, std::string repl
 std::string GetFileName(const std::string& path)
 {
 	return path.substr(path.find_last_of("/\\") + 1);
+}
+
+
+void ToLowerCase(std::string& str)
+{
+	std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c)
+		{
+			return std::tolower(c); 
+		});
+
 }

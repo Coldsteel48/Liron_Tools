@@ -21,8 +21,12 @@ bool IsCueFile(const std::string& filename)
 std::string GetProperCuePath(const std::string& WavDir)
 {
 	std::string CueDir = std::string(WavDir);
-	FindAndReplaceAll(CueDir, "/\\Wav/\\", "/\\Cue/\\");
-	if (!IsDirectoryExists(CueDir.c_str()))
+	FindAndReplaceAll(CueDir, "\\Wav\\", "\\Cue\\");
+	std::string FileName = GetFileName(CueDir);
+	std::string TempCueFolder = std::string(CueDir);
+	FindAndReplaceAll(TempCueFolder, FileName, "");
+
+	if (!IsDirectoryExists(TempCueFolder.c_str()))
 	{
 		CueDir = "";
 	}
@@ -33,6 +37,7 @@ std::string GetProperCuePath(const std::string& WavDir)
 
 int main(int argc, char* argv[])
 {
+	//std::string path = "H:\\HeroAlexVP"; 
 	std::string path = std::string(argv[0], strlen(argv[0]));
 	std::string base_filename = path.substr(path.find_last_of("/\\") + 1);
 	std::string inputFolderPath = path.substr(0, path.find_last_of("/\\") + 1);

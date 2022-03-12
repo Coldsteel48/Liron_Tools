@@ -13,9 +13,7 @@
 #include <map>
 
 void FilterStringToUE(std::string& in_out_string);
-std::string GetFileName(const std::string& path);
 void GuessRestoreFilteredString(std::string& in_out_string);
-void findAndReplaceAll(std::string & data, std::string toSearch, std::string replaceStr);
 void ReplaceLastDelimiter(std::string & in_out_path);
 
 int main(int argc, char* argv[])
@@ -36,7 +34,7 @@ int main(int argc, char* argv[])
 		std::string directoryPath = std::string(argv[1], strlen(argv[1]));
 
 		//Error handling:
-		if (!DirectoryExists(directoryPath.c_str()))
+		if (!IsDirectoryExists(directoryPath.c_str()))
 		{
 			std::cout << "Input directory is: " << directoryPath << std::endl;
 			std::cout << "Please specify a valid directory path!" << std::endl;
@@ -60,7 +58,7 @@ int main(int argc, char* argv[])
 	for (const auto & entry : std::experimental::filesystem::recursive_directory_iterator(inputFolderPath))
 	{
 		std::string fullPath = entry.path().string();
-		if (DirectoryExists(fullPath.c_str()))
+		if (IsDirectoryExists(fullPath.c_str()))
 		{
 			//This is a directory:
 			//Insert it to the map.
@@ -74,7 +72,7 @@ int main(int argc, char* argv[])
 				continue;
 			}
 
-			findAndReplaceAll(fullPath, filename, "");
+			FindAndReplaceAll(fullPath, filename, "");
 			ReplaceLastDelimiter(fullPath);
 
 			std::string directoryName = fullPath; //Not really :F
@@ -167,11 +165,6 @@ void ReplaceLastDelimiter(std::string & in_out_path)
 	}
 }
 
-std::string GetFileName(const std::string& path)
-{
-	return path.substr(path.find_last_of("/\\") + 1);
-}
-
 void GuessRestoreFilteredString(std::string& in_out_string)
 {
 	std::vector<StrDict> dictionary;
@@ -179,21 +172,6 @@ void GuessRestoreFilteredString(std::string& in_out_string)
 
 	for (const StrDict& entry : dictionary)
 	{
-		findAndReplaceAll(in_out_string, entry.origin, entry.target);
-	}
-}
-
-
-void findAndReplaceAll(std::string & data, std::string toSearch, std::string replaceStr)
-{
-	// Get the first occurrence
-	size_t pos = data.find(toSearch);
-	// Repeat till end is reached
-	while (pos != std::string::npos)
-	{
-		// Replace this occurrence of Sub String
-		data.replace(pos, toSearch.size(), replaceStr);
-		// Get the next occurrence from the current position
-		pos = data.find(toSearch, pos + replaceStr.size());
+		FindAndReplaceAll(in_out_string, entry.origin, entry.target);
 	}
 }

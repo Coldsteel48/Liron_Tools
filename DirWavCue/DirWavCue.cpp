@@ -28,7 +28,7 @@ int main(int argc, char* argv[])
 		std::string directoryPath = std::string(argv[1], strlen(argv[1]));
 
 		//Error handling:
-		if (!DirectoryExists(directoryPath.c_str()))
+		if (!IsDirectoryExists(directoryPath.c_str()))
 		{
 			std::cout << "Input directory is: " << directoryPath << std::endl;
 			std::cout << "Please specify a valid directory path!" << std::endl;
@@ -55,7 +55,7 @@ void ListDirectories(std::string rootPath, std::vector<std::string>& out_directo
 	//Get all files in directory and its sub directory:
 	for (const auto & entry : std::experimental::filesystem::recursive_directory_iterator(rootPath))
 	{
-		if (DirectoryExists(entry.path().string().c_str()))
+		if (IsDirectoryExists(entry.path().string().c_str()))
 		{
 			//We have a directory;
 			out_directories.push_back(entry.path().string());
@@ -75,7 +75,7 @@ void WavAndCueVoodoo(const std::vector<std::string>& directories)
 		//Non recursive because we want to voodoo
 		for (const auto & entry : std::experimental::filesystem::directory_iterator(dir))
 		{
-			if (!DirectoryExists(entry.path().string().c_str())) //No directory 
+			if (!IsDirectoryExists(entry.path().string().c_str())) //No directory 
 			{
 				if (IsWavFile(entry.path().string()))
 				{

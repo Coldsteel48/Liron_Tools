@@ -11,6 +11,7 @@
 #include <algorithm>
 #include "StrDict.h"
 #include <map>
+#include <conio.h>
 
 void FilterStringToUE(std::string& in_out_string);
 void GuessRestoreFilteredString(std::string& in_out_string);
@@ -144,8 +145,8 @@ int main(int argc, char* argv[])
 
 	out.close();
 
-	std::cout << '\a';
-	Sleep(1000);
+	std::cout << "Please check out the file:" << outputTxtPath << std::endl;
+	system("pause");
 
 	return 0;
 }

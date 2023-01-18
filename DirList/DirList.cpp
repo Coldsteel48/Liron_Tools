@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
 	std::map<std::string, std::vector<std::string>> files;
 
 	//Get all files in directory and its sub directory:
-	for (const auto & entry : std::experimental::filesystem::recursive_directory_iterator(inputFolderPath))
+	for (const auto & entry : std::filesystem::recursive_directory_iterator(inputFolderPath))
 	{
 		std::string fullPath = entry.path().string();
 		if (IsDirectoryExists(fullPath.c_str()))

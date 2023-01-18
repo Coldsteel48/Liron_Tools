@@ -201,7 +201,7 @@ bool compareNat(const std::string& a, const std::string& b)
 }
 
 //You can use this function with std::sort and vector
-bool compareNat_path(const std::experimental::filesystem::path& a, const std::experimental::filesystem::path& b)
+bool compareNat_path(const std::filesystem::path& a, const std::filesystem::path& b)
 {
 	if (strnatcmp(a.string().c_str(), b.string().c_str()) == -1) return true;
 	else return false;

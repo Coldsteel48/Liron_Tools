@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
 
 	std::vector<std::string> badFileNames;  badFileNames.reserve(150);
 
-	for (const auto& entry : std::experimental::filesystem::recursive_directory_iterator(inputFolderPath))
+	for (const auto& entry : std::filesystem::recursive_directory_iterator(inputFolderPath))
 	{
 		std::string fullPath = entry.path().string();
 		std::string filename = GetFileName(fullPath);

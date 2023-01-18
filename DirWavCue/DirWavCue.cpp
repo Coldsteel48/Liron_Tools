@@ -53,7 +53,7 @@ int main(int argc, char* argv[])
 void ListDirectories(std::string rootPath, std::vector<std::string>& out_directories)
 {
 	//Get all files in directory and its sub directory:
-	for (const auto & entry : std::experimental::filesystem::recursive_directory_iterator(rootPath))
+	for (const auto & entry : std::filesystem::recursive_directory_iterator(rootPath))
 	{
 		if (IsDirectoryExists(entry.path().string().c_str()))
 		{
@@ -73,7 +73,7 @@ void WavAndCueVoodoo(const std::vector<std::string>& directories)
 		this_dir_wavs.reserve(1000);
 
 		//Non recursive because we want to voodoo
-		for (const auto & entry : std::experimental::filesystem::directory_iterator(dir))
+		for (const auto & entry : std::filesystem::directory_iterator(dir))
 		{
 			if (!IsDirectoryExists(entry.path().string().c_str())) //No directory 
 			{
@@ -90,8 +90,8 @@ void WavAndCueVoodoo(const std::vector<std::string>& directories)
 			//Create Wav and Cue subdirectoriesP:
 			std::string wav_directory = dir + WAV;
 			std::string cue_directory = dir + CUE;
-			std::experimental::filesystem::create_directories(wav_directory);
-			std::experimental::filesystem::create_directories(cue_directory);
+			std::filesystem::create_directories(wav_directory);
+			std::filesystem::create_directories(cue_directory);
 
 			MoveFilesToDir(this_dir_wavs, wav_directory);
 		}
@@ -103,7 +103,7 @@ void MoveFilesToDir(const std::vector<std::string>& files, const std::string& di
 	for (const std::string& file : files)
 	{
 		std::string newFileName = directory + file.substr(file.find_last_of("/\\")) ;
-		std::experimental::filesystem::rename(file, newFileName);
+		std::filesystem::rename(file, newFileName);
 	}
 }
 

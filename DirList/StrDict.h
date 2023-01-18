@@ -87,8 +87,25 @@ struct StrDict
 		in_out_dictionary.push_back(StrDict("theres ", "there\'s "));
 		in_out_dictionary.push_back(StrDict("Theres ", "There\'s "));
 
+		in_out_dictionary.push_back(StrDict("Youve", "You\'ve"));
+		in_out_dictionary.push_back(StrDict("youve", "you\'ve"));
+
+		in_out_dictionary.push_back(StrDict("Whered", "Where\'d"));
+		in_out_dictionary.push_back(StrDict("whered", "where\'d"));
+
+		in_out_dictionary.push_back(StrDict("Havent", "Haven\'t"));
+		in_out_dictionary.push_back(StrDict("havent", "haven\'t"));
+
+		in_out_dictionary.push_back(StrDict("Hasnt", "Hasn\'t"));
+		in_out_dictionary.push_back(StrDict("hasnt", "hasn\'t"));
+
+		in_out_dictionary.push_back(StrDict("Theyre", "They\'re"));
+		in_out_dictionary.push_back(StrDict("theyre", "they\'re"));
+
+		in_out_dictionary.push_back(StrDict("Theyve", "They\'ve"));
+		in_out_dictionary.push_back(StrDict("theyve", "they\'ve"));
+
 		in_out_dictionary.push_back(StrDict(" (Q)", "?"));
 		in_out_dictionary.push_back(StrDict(" (q)", "?"));
-
 	}
 };

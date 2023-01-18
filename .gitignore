@@ -1,4 +1,7 @@
-
+.PoopiPathLengthChecker/x64/
+.Poopi_Cue_Mover/x64/
+.DirWavCue/x64/
+.DirList/x64/
 .x64/
 .vs/
 Binaries/*
